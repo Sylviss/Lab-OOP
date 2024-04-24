@@ -49,4 +49,10 @@ public class DigitalVideoDisc {
         else {trueLength = Integer.toString(length);}
         return id + ". DVD - " + title + " - " + cagetory + " - " + director + " - " + trueLength + ": " + cost + " $";
     }
+    public boolean isMatch(int id){
+        return Integer.toString(this.id).contains(Integer.toString(id));
+    }
+    public boolean isMatch(String title){
+        return this.title.contains(title);
+    }
 }
