@@ -43,6 +43,19 @@ public class Cart {
         }
     }
 
+    public void addDigitalVideoDisc(DigitalVideoDisc dvd1,DigitalVideoDisc dvd2){
+        if(qtyOrdered + 2 <= MAX_NUMBER_ORDERED){
+            itemsOrdered[qtyOrdered] = dvd1;
+            itemsOrdered[qtyOrdered+1] = dvd2;
+            qtyOrdered+=2;
+            System.out.println("The discs have been added.");
+        }
+        else{
+            System.out.println("The cart don't have that many slot left.");
+        }
+    }
+
+
     public void removeDigitalVideoDisc(DigitalVideoDisc disc){
         for(int i = 0; i < qtyOrdered; i++){
             if(itemsOrdered[i] == disc){
