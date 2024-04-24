@@ -39,7 +39,6 @@ public class Cart {
         }
         else{
             System.out.println("The cart don't have that many slot left.");
-            return;
         }
     }
 
@@ -78,7 +77,15 @@ public class Cart {
         return total;
     }
 
-    public int getQtyOrdered() {
+    public int getQtyOrdered(){
         return qtyOrdered;
+    }
+
+    public void print(){
+        System.out.print("***********************CART***********************\nOrdered Items:\n");
+        for(int i = 0; i < qtyOrdered; i++){
+            System.out.println(itemsOrdered[i].toString());
+        }
+        System.out.print("Total cost: " + totalCost() + "\n***************************************************");
     }
 }

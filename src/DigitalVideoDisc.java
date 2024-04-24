@@ -1,9 +1,9 @@
 public class DigitalVideoDisc {
     private String title;
-    private String cagetory;
-    private String director;
-    private int length;
-    private float cost;
+    private String cagetory = "Unknown";
+    private String director = "Unknown";
+    private int length = 0;
+    private float cost = 0;
     private int id;
     private static int nbDigitalVideoDiscs = 0;
 
@@ -34,16 +34,19 @@ public class DigitalVideoDisc {
         this(title);
         this.cagetory = category;
         this.cost = cost;
-        id = ++nbDigitalVideoDiscs;
     }
     public DigitalVideoDisc(String title, String category, String director, float cost){
         this(title, category, cost);
         this.director = director;
-        id = ++nbDigitalVideoDiscs;
     }
     public DigitalVideoDisc(String title, String category, String director, int length, float cost){
         this(title, category, director, cost);
         this.length = length;
-        id = ++nbDigitalVideoDiscs;
+    }
+    public String toString(){
+        String trueLength;
+        if (length == 0) {trueLength = "Unknown";}
+        else {trueLength = Integer.toString(length);}
+        return id + ". DVD - " + title + " - " + cagetory + " - " + director + " - " + trueLength + ": " + cost + " $";
     }
 }
