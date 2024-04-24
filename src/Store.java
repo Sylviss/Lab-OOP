@@ -30,5 +30,6 @@ public class Store {
             System.out.println(itemsInStore[i].toString());
         }
         System.out.println("**************************************************");
+        
     }
 }
