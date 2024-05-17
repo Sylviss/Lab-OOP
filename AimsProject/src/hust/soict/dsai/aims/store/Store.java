@@ -1,38 +1,35 @@
 package hust.soict.dsai.aims.store;
-import hust.soict.dsai.aims.disc.DigitalVideoDisc;
+import java.util.ArrayList;
+import java.util.List;
+
+import hust.soict.dsai.aims.media.Media;
 
 public class Store {
-    private int storeLimit = 100000;
-    private DigitalVideoDisc itemsInStore[] = new DigitalVideoDisc[storeLimit];
-    private int currentIndex = 0;
+    List<Media> itemsInStore = new ArrayList<>();
 
     public Store(){}
-    public void addDVD(DigitalVideoDisc dvd){
-        if(currentIndex < storeLimit){
-            itemsInStore[currentIndex] = dvd;
-            currentIndex++;
+    public void addMedia(Media media){
+        itemsInStore.add(media);
+        System.out.println("The item is added to the store");
+    }
+    public void removeMedia(Media media){
+        if (itemsInStore.remove(media)){
+            System.out.println("The item is removed from the store");
         }
         else{
-            System.out.println("Store is full");
-        }
-    }
-    public void removeDVD(DigitalVideoDisc dvd){
-        for(int i = 0; i < currentIndex; i++){
-            if(itemsInStore[i]==dvd){
-                for(int j = i; j < currentIndex - 1; j++){
-                    itemsInStore[j] = itemsInStore[j + 1];
-                }
-                currentIndex--;
-                break;
-            }
+            System.out.println("Cannot found this item");
         }
     }
     public void print(){
         System.out.print("***********************Store**********************\nOrdered Items:\n");
-        for(int i = 0; i < currentIndex; i++){
-            System.out.println(itemsInStore[i].toString());
+        for (Media media : itemsInStore) {
+            System.out.println(media.toString());
         }
         System.out.println("**************************************************");
         
+    }
+    public Media getMedia(String title){
+        Media media = itemsInStore.stream().filter(med -> med.sameTitle(title)).findFirst().orElse(null);
+        return media;
     }
 }
