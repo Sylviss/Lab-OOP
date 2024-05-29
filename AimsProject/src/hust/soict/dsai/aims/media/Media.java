@@ -8,7 +8,7 @@ public abstract class Media {
     protected String title;
     protected String category;
     protected float cost;
-
+    
     Media() {
     }
 
