@@ -32,4 +32,8 @@ public class Store {
         Media media = itemsInStore.stream().filter(med -> med.sameTitle(title)).findFirst().orElse(null);
         return media;
     }
+
+    public ArrayList<Media> getItemsInStore(){
+        return (ArrayList<Media>) itemsInStore;
+    }
 }

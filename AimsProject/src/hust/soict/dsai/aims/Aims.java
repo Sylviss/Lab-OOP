@@ -2,47 +2,85 @@ package hust.soict.dsai.aims;
 import hust.soict.dsai.aims.cart.Cart;
 import hust.soict.dsai.aims.media.*;
 import hust.soict.dsai.aims.store.Store;
+import hust.soict.dsai.exception.PlayerException;
+import hust.soict.dsai.swing.StoreScreen;
+
 import java.util.Scanner;
 public class Aims {
     public static final String LINE = "--------------------------------";
+
+    public static void main2(){
+                // Store store = new Store();
+        // for (int i = 0; i < 10; i++) {
+        //     int randomMediaType = (int) (Math.random() * 3) + 1;
+        //     switch (randomMediaType) {
+        //         case 1:
+        //             store.addMedia(generateRandomBook());
+        //             break;
+        //         case 2:
+        //             store.addMedia(generateRandomDVD());
+        //             break;
+        //         case 3:
+        //             store.addMedia(generateRandomCD());
+        //             break;
+        //     }
+        // }
+        // for (int i = 0; i < 10; i++) {
+        //     int randomMediaType = (int) (Math.random() * 3);
+        //     switch (randomMediaType) {
+        //         case 0:
+        //             store.addMedia(generateRandomBook());
+        //             break;
+        //         case 1:
+        //             store.addMedia(generateRandomDVD());
+        //             break;
+        //         case 2:
+        //             store.addMedia(generateRandomCD());
+        //             break;
+        //     }
+        // }
+        // Cart cart = new Cart();
+        // Scanner scanner = new Scanner(System.in);
+        // showMenu(scanner,store,cart);
+    }
     public static void main(String[] args){
+
         Store store = new Store();
+        Cart cart = new Cart();
         for (int i = 0; i < 10; i++) {
             int randomMediaType = (int) (Math.random() * 3) + 1;
             switch (randomMediaType) {
                 case 1:
-                    store.addMedia(generateRandomBook());
+                    store.addMedia(Aims.generateRandomBook());
                     break;
                 case 2:
-                    store.addMedia(generateRandomDVD());
+                    store.addMedia(Aims.generateRandomDVD());
                     break;
                 case 3:
-                    store.addMedia(generateRandomCD());
+                    store.addMedia(Aims.generateRandomCD());
                     break;
             }
         }
         for (int i = 0; i < 10; i++) {
-            int randomMediaType = (int) (Math.random() * 3);
+            int randomMediaType = (int) (Math.random() * 3) + 1;
             switch (randomMediaType) {
-                case 0:
-                    store.addMedia(generateRandomBook());
-                    break;
                 case 1:
-                    store.addMedia(generateRandomDVD());
+                    store.addMedia(Aims.generateRandomBook());
                     break;
                 case 2:
-                    store.addMedia(generateRandomCD());
+                    store.addMedia(Aims.generateRandomDVD());
+                    break;
+                case 3:
+                    store.addMedia(Aims.generateRandomCD());
                     break;
             }
         }
-        Cart cart = new Cart();
-        Scanner scanner = new Scanner(System.in);
-        showMenu(scanner,store,cart);
+        StoreScreen storeScreen = new StoreScreen(store,cart);
     }
 
     //#####################################################################
 
-    private static Book generateRandomBook() {
+    public static Book generateRandomBook() {
         String[] titles = {"Book 1", "Book 2", "Book 3"};
         String[] categories = {"Category 1", "Category 2", "Category 3"};
         float[] costs = {10.0f, 20.0f, 30.0f};
@@ -50,15 +88,15 @@ public class Aims {
         return new Book(titles[randomIndex], categories[randomIndex], costs[randomIndex]);
     }
 
-    private static DigitalVideoDisc generateRandomDVD() {
+    public static DigitalVideoDisc generateRandomDVD() {
         String[] titles = {"DVD 1", "DVD 2", "DVD 3"};
         String[] categories = {"Category 1", "Category 2", "Category 3"};
         float[] costs = {10.0f, 20.0f, 30.0f};
         int randomIndex = (int) (Math.random() * titles.length);
-        return new DigitalVideoDisc(titles[randomIndex], categories[randomIndex], costs[randomIndex]);
+        return new DigitalVideoDisc(titles[randomIndex], categories[randomIndex],costs[randomIndex],1);
     }
 
-    private static CompactDisc generateRandomCD() {
+    public static CompactDisc generateRandomCD() {
         String[] titles = {"CD 1", "CD 2", "CD 3"};
         String[] categories = {"Category 1", "Category 2", "Category 3"};
         float[] costs = {10.0f, 20.0f, 30.0f};
@@ -178,9 +216,14 @@ public class Aims {
                 break;
             case 2:
                 if (media instanceof Playable){
+                    try{
                     ((Playable) media).play();
                     mediaDetailsMenu(scanner, store, cart, media);
                     break;
+                    } catch (PlayerException e){
+                        System.out.println(e);
+                        break;
+                    }
                 }
                 else{
                     System.out.println("This media is not playable");
@@ -214,7 +257,11 @@ public class Aims {
             return;
         }
         if (media instanceof Playable){
-            ((Playable) media).play();
+            try{
+                ((Playable) media).play();
+            } catch (PlayerException e){
+                System.out.println(e);
+            }
         }
         else{
             System.out.println("This media is not playable");
@@ -427,7 +474,11 @@ public class Aims {
             return;
         }
         if (media instanceof Playable){
-            ((Playable) media).play();
+            try{
+                ((Playable) media).play();
+            } catch (PlayerException e){
+                System.out.println(e);
+            }
         }
         else{
             System.out.println("This media is not playable");

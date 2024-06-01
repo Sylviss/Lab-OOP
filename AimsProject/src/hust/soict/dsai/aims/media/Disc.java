@@ -19,6 +19,10 @@ public abstract class Disc extends Media{
         super(title, category, cost);
         this.director = director;
     }
+    Disc(String title, String category, float cost, int length){
+        super(title, category, cost);
+        this.length = length;
+    }
     Disc(String title, String category, String director, int length, float cost){
         super(title, category, cost);
         this.director = director;

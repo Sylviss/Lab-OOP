@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import hust.soict.dsai.exception.PlayerException;
+
 public class CompactDisc extends Disc implements Playable{
     private static int nbCompactDiscs = 0;
     private String artist;
@@ -41,14 +43,20 @@ public class CompactDisc extends Disc implements Playable{
     public void removeAuthor(Track track){
         tracks = tracks.stream().filter(c -> !c.equals(track)).collect(Collectors.toList());
     }
-    public void play(){
-        System.out.println("Playing CD: " + this.getTitle());
-        System.out.println("CD length: " + this.getLength());
-        System.out.println("...................................................");
+    public String play() throws PlayerException{
+        String res = "";
+        res+=("Playing CD: " + this.getTitle());
+        res+="\n";
+        res+=("CD length: " + this.getLength());
+        res+="\n";
+        res+=("...................................................");
+        res+="\n";
         for (Track track : tracks){
-            track.play();
-            System.out.println("...................................................");
+            res+=track.play();
+            res+="...................................................";
+            res+="\n";
         }
+        return res;
     }
 
     public String toString(){
